@@ -3,12 +3,12 @@ import React from "react";
 export default function Sort({ activeSortType, onChangeSort }) {
   const [open, setOpen] = React.useState(false);
   const list = [
-    { name: "популярности ↑", sotrProperty: "rating" },
-    { name: "популярности ↓", sotrProperty: "-rating" },
-    { name: "цене ↑", sotrProperty: "price" },
-    { name: "цене ↓", sotrProperty: "-price" },
-    { name: "алфавиту ↑", sotrProperty: "title" },
-    { name: "алфавиту ↓", sotrProperty: "-title" },
+    { name: "популярности ↓", sotrProperty: "rating" },
+    { name: "популярности ↑", sotrProperty: "-rating" },
+    { name: "цене ↓", sotrProperty: "price" },
+    { name: "цене ↑", sotrProperty: "-price" },
+    { name: "алфавиту ↓", sotrProperty: "title" },
+    { name: "алфавиту ↑", sotrProperty: "-title" },
   ];
 
   const onClickSortList = (i) => {
@@ -49,7 +49,6 @@ export default function Sort({ activeSortType, onChangeSort }) {
                 {obj.name}
               </li>
             ))}
-            <li className="active"></li>
           </ul>
         </div>
       )}
