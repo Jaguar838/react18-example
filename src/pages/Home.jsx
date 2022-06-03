@@ -9,8 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setCategoryId, setSortType} from '../redux/slices/filterSlice'
 
 export default function Home() {
-    const categoryId = useSelector((state) => state.filter.categoryId)
-    const sortType = useSelector((state) => state.filter.sortType)
+    const {categoryId, sortType} = useSelector((state) => state.filter)
     console.log('sortType',sortType)
     const dispatch = useDispatch()
   const {searchValue}=useContext(SearchContext)
