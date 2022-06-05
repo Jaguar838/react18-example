@@ -1,24 +1,25 @@
 import React from "react";
 
-export default function Sort({ activeSortType, onChangeSort }) {
+export const list = [
+  {name: "популярности ↓", sotrProperty: "rating"},
+  {name: "популярности ↑", sotrProperty: "-rating"},
+  {name: "цене ↓", sotrProperty: "price"},
+  {name: "цене ↑", sotrProperty: "-price"},
+  {name: "алфавиту ↓", sotrProperty: "title"},
+  {name: "алфавиту ↑", sotrProperty: "-title"},
+];
+export default function Sort({activeSortType, onChangeSort}) {
   const [open, setOpen] = React.useState(false);
-  const list = [
-    { name: "популярности ↓", sotrProperty: "rating" },
-    { name: "популярности ↑", sotrProperty: "-rating" },
-    { name: "цене ↓", sotrProperty: "price" },
-    { name: "цене ↑", sotrProperty: "-price" },
-    { name: "алфавиту ↓", sotrProperty: "title" },
-    { name: "алфавиту ↑", sotrProperty: "-title" },
-  ];
+
 
   const onClickSortList = (i) => {
     onChangeSort(i);
     setOpen(false);
   };
   return (
-    <div className="sort">
-      <div className="sort__label">
-        <svg
+      <div className="sort">
+        <div className="sort__label">
+          <svg
           width="10"
           height="6"
           viewBox="0 0 10 6"
