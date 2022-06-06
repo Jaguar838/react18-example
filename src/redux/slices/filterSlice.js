@@ -5,7 +5,7 @@ const initialState = {
     currentPage: 1,
     sortType: {
         name: "популярности",
-        sotrProperty: "rating",
+        sortProperty: "rating",
     },
 };
 

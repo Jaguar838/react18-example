@@ -10,7 +10,7 @@ import {
 } from "../redux/slices/filterSlice";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {list} from "../components/Sort";
+import {sortList} from "../components/Sort";
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
@@ -25,9 +25,10 @@ export default function Home() {
   console.log(categoryId, currentPage, sortType);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isSearch = useRef(false);
+  console.log(navigate)
+  const isSearch = useRef(true);
   const isMounted = useRef(false); // Первого рендера еще не было
-
+  console.log(isSearch.current, isSearch)
   const {searchValue} = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,8 +42,8 @@ export default function Home() {
   const onChangePages = (number) => {
     dispatch(setCurrentPage(number));
   };
-  const sortBy = sortType.sotrProperty.replace("-", "");
-  const order = sortType.sotrProperty.includes("-") ? "asc" : "desc"; // ↑ : ↓
+  const sortBy = sortType.sortProperty.replace("-", "");
+  const order = sortType.sortProperty.includes("-") ? "asc" : "desc"; // ↑ : ↓
   const category = categoryId > 0 ? `category=${categoryId}` : "";
   const search = searchValue ? `&search=${searchValue}` : "";
 
@@ -51,7 +52,7 @@ export default function Home() {
     if (isMounted.current) {
       const queryString = qs.stringify({
         categoryId,
-        sotrProperty: sortType.sotrProperty,
+        sortProperty: sortType.sotrProperty,
         currentPage,
       });
       navigate(`?${queryString}`);
@@ -64,7 +65,7 @@ export default function Home() {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       console.log(params);
-      const sortType = list.find(
+      const sortType = sortList.find(
           (obj) => obj.sortProperty === params.sortProperty
       );
 
@@ -73,7 +74,7 @@ export default function Home() {
     }
   }, []);
 
-  // Если был первый рендер, тозапрашиваем пиццы
+  // Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     if (isSearch.current) {
       setIsLoading(true);

@@ -1,11 +1,11 @@
 import React from "react";
-export const list = [
-    {name: "популярности ↓", sotrProperty: "rating"},
-    {name: "популярности ↑", sotrProperty: "-rating"},
-    {name: "цене ↓", sotrProperty: "price"},
-    {name: "цене ↑", sotrProperty: "-price"},
-    {name: "алфавиту ↓", sotrProperty: "title"},
-    {name: "алфавиту ↑", sotrProperty: "-title"},
+export const sortList = [
+    {name: "популярности ↓", sortProperty: "rating"},
+    {name: "популярности ↑", sortProperty: "-rating"},
+    {name: "цене ↓", sortProperty: "price"},
+    {name: "цене ↑", sortProperty: "-price"},
+    {name: "алфавиту ↓", sortProperty: "title"},
+    {name: "алфавиту ↑", sortProperty: "-title"},
 ];
 export default function Sort({activeSortType, onChangeSort}) {
     const [open, setOpen] = React.useState(false);
@@ -35,17 +35,17 @@ export default function Sort({activeSortType, onChangeSort}) {
       {open && (
         <div className="sort__popup">
           <ul>
-            {list.map((obj, i) => (
-              <li
-                key={i}
-                className={
-                  activeSortType.sotrProperty === obj.sotrProperty
-                    ? "active"
-                    : ""
-                }
-                onClick={() => onClickSortList(obj)}
-              >
-                {obj.name}
+              {sortList.map((obj, i) => (
+                  <li
+                      key={i}
+                      className={
+                          activeSortType.sortProperty === obj.sortProperty
+                              ? "active"
+                              : ""
+                      }
+                      onClick={() => onClickSortList(obj)}
+                  >
+                      {obj.name}
               </li>
             ))}
           </ul>
