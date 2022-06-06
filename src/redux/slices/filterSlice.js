@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     categoryId: 0,
@@ -6,33 +6,33 @@ const initialState = {
     sortType: {
         name: "популярности",
         sotrProperty: "rating",
-    }
-}
+    },
+};
 
 export const filterSlice = createSlice({
-    name: 'filters',
+    name: "filters",
     initialState,
     reducers: {
         setCategoryId(state, action) {
-            state.categoryId = action.payload
-            console.log('action setCategoryId', action)
-
+            state.categoryId = action.payload;
+            console.log("action setCategoryId", action);
         },
         setSortType(state, action) {
-            state.sortType = action.payload
+            state.sortType = action.payload;
         },
         setCurrentPage(state, action) {
-            state.currentPage = action.payload
+            state.currentPage = action.payload;
         },
         setFilters(state, action) {
-            state.categoryId = action.payload.categoryId
-            state.sortType = Number(action.payload.sortType)
-            state.currentPage = Number(action.payload.currentPage)
-        }
+            state.sortType = action.payload.sortType;
+            state.categoryId = Number(action.payload.categoryId);
+            state.currentPage = Number(action.payload.currentPage);
+        },
     },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const {setCategoryId, setSortType, setCurrentPage, setFilters} = filterSlice.actions
+export const {setCategoryId, setSortType, setCurrentPage, setFilters} =
+    filterSlice.actions;
 
-export default filterSlice.reducer
+export default filterSlice.reducer;

@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'
 import {SearchContext} from "../../App";
 import css from "./Search.module.scss";
 
-export default function Search(callback, deps) {
+export default function Search() {
     const [value, setValue] = useState('')
     const {setSearchValue} = useContext(SearchContext);
     const inputRef = useRef()
