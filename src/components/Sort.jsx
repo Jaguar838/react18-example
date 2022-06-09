@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 export const sortList = [
     {name: "популярности ↓", sortProperty: "rating"},
     {name: "популярности ↑", sortProperty: "-rating"},
@@ -9,13 +9,23 @@ export const sortList = [
 ];
 export default function Sort({activeSortType, onChangeSort}) {
     const [open, setOpen] = React.useState(false);
-
+    const sortRef = useRef()
     const onClickSortList = (i) => {
         onChangeSort(i);
         setOpen(false);
     };
+    useEffect(() => {
+        const handelClickOutside = (event) => {
+            if (!event.path.includes(sortRef.current)) {
+                console.log('click outside')
+                setOpen(false);
+            }
+        }
+        document.body.addEventListener('click', handelClickOutside)
+        return () => document.body.removeEventListener('click', handelClickOutside)
+    }, [])
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"

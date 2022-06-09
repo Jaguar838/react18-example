@@ -15,7 +15,6 @@ export const filterSlice = createSlice({
     reducers: {
         setCategoryId(state, action) {
             state.categoryId = action.payload;
-            console.log("action setCategoryId", action);
         },
         setSortType(state, action) {
             state.sortType = action.payload;
