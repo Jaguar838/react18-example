@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import logoSvg from "../assets/img/pizza-logo.svg";
-import Search from "./Search";
+import Search from "./Search/Search";
 import {useSelector} from "react-redux";
 
 

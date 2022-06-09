@@ -18,3 +18,9 @@
 //     }),
 // })
 // export const {useGetPizzasQuery} = api
+// no Side Effect
+//Парадигма чистых функций Functional Componenta
+// 1. API calls /не должна делать запросы на сервер
+// 2. modification of parameters / нельзя модифицировать входящие параметры
+// 3. change DOM directly / лезть напрямую DOM  в и изменять єл-ты
+// 4. change outer scope variables / изменять внешние переменные
