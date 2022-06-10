@@ -1,15 +1,14 @@
-import React, {useEffect, useContext, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import qs from "qs";
-import {SearchContext} from "../App";
 import {useSelector, useDispatch} from "react-redux";
 import {
     setCategoryId,
     setSortType,
     setCurrentPage,
-    setFilters,
+    setFilters, selectFilter,
 } from "../redux/slices/filterSlice";
-import {fetchPizzas} from '../redux/slices/pizzasSlice'
-import {useNavigate} from "react-router-dom";
+import {fetchPizzas, selectPizzaData} from '../redux/slices/pizzasSlice'
+import {Link, useNavigate} from "react-router-dom";
 import {sortList} from "../components/Sort";
 
 import Categories from "../components/Categories";
@@ -20,21 +19,14 @@ import Pagination from "../components/Pagination/Pagination";
 import css from "../components/NotFoundBlock/NotFoundBlock.module.scss";
 
 export default function Home() {
-    const {categoryId, currentPage, sortType} = useSelector(
-        (state) => state.filter
-    );
-    const {items, status} = useSelector(
-        (state) => state.pizzas
-    );
+    const {categoryId, currentPage, sortType, searchValue} = useSelector(selectFilter);
+    const {items, status} = useSelector(selectPizzaData);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const isSearch = useRef(true);
     const isMounted = useRef(false); // Первого рендера еще не было
-
-    const {searchValue} = useContext(SearchContext);
-
 
     const onChangeCategory = (id) => {
         dispatch(setCategoryId(id));
@@ -106,19 +98,21 @@ export default function Home() {
         [category, sortBy, order, search, currentPage]
     );
 
-    const skeletons = [...new Array(6)].map((_, index) => (
+    const skeletons = [...new Array(4)].map((_, index) => (
         <Skeleton key={index}/>
     ));
     const pizzas = items.map(({id, title, price, imageUrl, sizes, types}) => (
-        <PizzaBlock
-            key={id}
-            id={id}
-            title={title}
-            price={price}
-            imageUrl={imageUrl}
-            sizes={sizes}
-            types={types}
-        />
+        <Link key={id} to={`/pizza/${id}`}>
+            <PizzaBlock
+
+                id={id}
+                title={title}
+                price={price}
+                imageUrl={imageUrl}
+                sizes={sizes}
+                types={types}
+            />
+        </Link>
     ));
     return (
         <div className="container">
