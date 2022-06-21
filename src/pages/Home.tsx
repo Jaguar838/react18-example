@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../redux/store";
 import {
   setCategoryId,
-  setSortOption,
   setCurrentPage,
   setFilters,
   selectFilter,
@@ -39,9 +38,6 @@ const Home: React.FC = () => {
     dispatch(setCategoryId(idx));
   }, []);
 
-  const onChangesortOption = (obj) => {
-    dispatch(setSortOption(obj));
-  };
   const onChangePages = (page: number) => {
     dispatch(setCurrentPage(page));
   };
