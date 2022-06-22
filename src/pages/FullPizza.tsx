@@ -40,7 +40,7 @@ export default function FullPizza() {
       <img src={pizza.imageUrl} alt="Pizza" />
       <h2>{pizza.title}</h2>
       <h4>{pizza.price} ₴</h4>
-      <Link to="/">
+      <Link to="/not">
         <button className="button button--outline button--add">
           <span>Назад</span>
         </button>
