@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IFilterSliceState, Sort, SortPropertyEnum} from "./types";
+import {IFilterSliceState, SortPropertyEnum, SortType} from "./types";
 
 
 const initialState: IFilterSliceState = {
@@ -22,7 +22,7 @@ export const filterSlice = createSlice({
         setSearchValue(state, action: PayloadAction<string>) {
             state.searchValue = action.payload;
         },
-        setSortOption(state, action: PayloadAction<Sort>) {
+        setSortOption(state, action: PayloadAction<SortType>) {
             state.sortOption = action.payload;
         },
         setCurrentPage(state, action: PayloadAction<number>) {

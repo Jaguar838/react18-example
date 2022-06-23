@@ -4,7 +4,7 @@ import {
     Watch
 } from 'react-loader-spinner';
 
-const LoaderUI: React.FC = () => (
+export const LoaderUI: React.FC = () => (
     <Watch
         color="#fe5f1e"
         height="100"
@@ -12,5 +12,3 @@ const LoaderUI: React.FC = () => (
         radius="40"
     />
 );
-
-export default LoaderUI;

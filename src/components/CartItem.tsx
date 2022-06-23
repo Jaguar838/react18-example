@@ -2,42 +2,42 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {
-  addItem,
-  minusItem,
-  removeItem,
-} from "../../redux/cart/slice";
-import {CartItemType} from "../../redux/cart/types";
+    addItem,
+    minusItem,
+    removeItem,
+} from "../redux/cart/slice";
+import {CartItemType} from "../redux/cart/types";
 
 type CartItemProps = {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  size: number;
-  count?: number;
-  imageUrl: string;
+    id: string;
+    title: string;
+    type: string;
+    price: number;
+    size: number;
+    count?: number;
+    imageUrl: string;
 };
 
-const CartItem = ({
-  id,
-  title,
-  type,
-  price,
-  size,
-  count,
-  imageUrl,
-}: CartItemProps) => {
-  const dispatch = useDispatch();
+export const CartItem = ({
+                             id,
+                             title,
+                             type,
+                             price,
+                             size,
+                             count,
+                             imageUrl,
+                         }: CartItemProps) => {
+    const dispatch = useDispatch();
 
-  const onClickPlus = () => {
-    dispatch(
-      addItem({
-        id,
-      } as CartItemType)
-    );
-  };
+    const onClickPlus = () => {
+        dispatch(
+            addItem({
+                id,
+            } as CartItemType)
+        );
+    };
 
-  const onClickMinus = () => {
+    const onClickMinus = () => {
     dispatch(minusItem(id));
   };
 
@@ -134,4 +134,3 @@ const CartItem = ({
     </div>
   );
 };
-export default CartItem;

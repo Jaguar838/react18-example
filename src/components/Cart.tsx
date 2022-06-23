@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import CartItem from "../components/Cart/CartItem";
+import {Link} from "react-router-dom";
+
+import {useDispatch, useSelector} from "react-redux";
 import {selectorCart} from "../redux/cart/selectors";
-import CartEmpty from "../components/Cart/CartEmpty";
 import {clearItem} from "../redux/cart/slice";
 
+import {CartEmpty, CartItem} from "./index";
+
 const Cart: React.FC = () => {
-  const { totalPrice, items } = useSelector(selectorCart);
+  const {totalPrice, items} = useSelector(selectorCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const dispatch = useDispatch();
 
@@ -18,13 +19,13 @@ const Cart: React.FC = () => {
   };
 
   if (!totalPrice) {
-    return <CartEmpty />;
+    return <CartEmpty/>;
   } else {
     return (
-      <div className="container container--cart">
-        <div className="cart">
-          <div className="cart__top">
-            <h2 className="content__title">
+        <div className="container container--cart">
+          <div className="cart">
+            <div className="cart__top">
+              <h2 className="content__title">
               <svg
                 width="18"
                 height="18"

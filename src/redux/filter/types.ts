@@ -7,7 +7,7 @@ export enum SortPropertyEnum {
     RATING_ASC = "-rating",
 }
 
-export type Sort = {
+export type SortType = {
     name: string;
     sortProperty: SortPropertyEnum;
 };
@@ -16,5 +16,5 @@ export interface IFilterSliceState {
     searchValue: string;
     categoryId: number;
     currentPage: number;
-    sortOption: Sort;
+    sortOption: SortType;
 }

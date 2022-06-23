@@ -1,39 +1,36 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import qs from "qs";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import {useAppDispatch} from "../redux/store";
 import {
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
+    setCategoryId,
+    setCurrentPage,
+    setFilters,
 } from "../redux/filter/slice";
 import {useNavigate} from "react-router-dom";
-import {sortList} from "../components/Sort";
+import {sortList} from "../components";
 
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from "../components/Pagination/Pagination";
-import css from "../components/NotFoundBlock/NotFoundBlock.module.scss";
+import {Categories, Pagination, PizzaBlock, Skeleton, Sort} from "../components";
+
 import {selectFilter} from "../redux/filter/selectors";
 import {selectPizzaData} from "../redux/pizza/selectors";
 import {SearchPizzaParams} from "../redux/pizza/types";
 import {fetchPizzas} from "../redux/pizza/asyncAction";
+import css from "../components/NotFoundBlock/NotFoundBlock.module.scss";
 
 const Home: React.FC = () => {
-  const {categoryId, currentPage, sortOption, searchValue} =
-      useSelector(selectFilter);
-  const {items, status} = useSelector(selectPizzaData);
+    const {categoryId, currentPage, sortOption, searchValue} =
+        useSelector(selectFilter);
+    const {items, status} = useSelector(selectPizzaData);
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-  const isSearch = useRef(true);
-  const isMounted = useRef(false); // Первого рендера еще не было
+    const isSearch = useRef(true);
+    const isMounted = useRef(false); // Первого рендера еще не было
 
-  const onChangeCategory = useCallback((idx: number) => {
-    dispatch(setCategoryId(idx));
+    const onChangeCategory = useCallback((idx: number) => {
+        dispatch(setCategoryId(idx));
   }, []);
 
   const onChangePages = (page: number) => {

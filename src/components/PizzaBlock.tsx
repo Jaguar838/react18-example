@@ -1,41 +1,41 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {addItem} from "../../redux/cart/slice";
-import {selectorCartItemById} from "../../redux/cart/selectors";
-import {CartItemType} from "../../redux/cart/types";
+import {addItem} from "../redux/cart/slice";
+import {selectorCartItemById} from "../redux/cart/selectors";
+import {CartItemType} from "../redux/cart/types";
 
 type PizzaBlockProps = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  sizes: number[];
-  types: number[];
-  rating: number;
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    sizes: number[];
+    types: number[];
+    rating: number;
 };
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({
-  id,
-  title,
-  price,
-  imageUrl,
-  sizes,
-  types,
-}) => {
-  const typeNames = ["тонкое", "традиционное"];
-  const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSize] = useState(0);
-  const dispatch = useDispatch();
-  const cartItem = useSelector(selectorCartItemById(id));
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
+                                                          id,
+                                                          title,
+                                                          price,
+                                                          imageUrl,
+                                                          sizes,
+                                                          types,
+                                                      }) => {
+    const typeNames = ["тонкое", "традиционное"];
+    const [activeType, setActiveType] = useState(0);
+    const [activeSize, setActiveSize] = useState(0);
+    const dispatch = useDispatch();
+    const cartItem = useSelector(selectorCartItemById(id));
 
-  const addedCount = cartItem ? cartItem.count : 0;
-  const onClickAdd = () => {
-    const item: CartItemType = {
-      id,
-      title,
-      price,
-      imageUrl,
+    const addedCount = cartItem ? cartItem.count : 0;
+    const onClickAdd = () => {
+        const item: CartItemType = {
+            id,
+            title,
+            price,
+            imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
     };
@@ -98,4 +98,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     </div>
   );
 };
-export default PizzaBlock;

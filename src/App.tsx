@@ -5,10 +5,10 @@ import Home from "./pages/Home";
 
 import MainLayout from "./layout/MainLayout";
 import {lazy, Suspense} from "react";
-import LoaderUI from "./components/LoaderUI";
+import {LoaderUI} from "./components";
 
 const Cart = Loadable({
-    loader: () => import("./pages/Cart" /* webpackChunkName: "Cart" */),
+    loader: () => import("./components/Cart" /* webpackChunkName: "Cart" */),
     loading: () => <LoaderUI/>,
 });
 const FullPizza = lazy(

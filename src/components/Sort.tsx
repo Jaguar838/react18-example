@@ -1,48 +1,47 @@
 import React, {memo, useEffect, useRef} from "react";
-import {setSortOption} from "../redux/filter/slice";
-import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 import {useDispatch} from "react-redux";
-import {SortPropertyEnum} from "../redux/filter/types";
+import {setSortOption} from "../redux/filter/slice";
 
-type SortItem = { name: string; sortProperty: SortPropertyEnum };
+import {SortPropertyEnum, SortType} from "../redux/filter/types";
+import useWhyDidYouUpdate from "ahooks/lib/useWhyDidYouUpdate";
 
 type PopupClick = MouseEvent & {
-  path: Node[];
+    path: Node[];
 };
 
-export const sortList: SortItem[] = [
-  { name: "популярности ↓", sortProperty: SortPropertyEnum.RATING_DESC },
-  { name: "популярности ↑", sortProperty: SortPropertyEnum.RATING_ASC },
-  { name: "цене ↓", sortProperty: SortPropertyEnum.PRICE_DESC },
-  { name: "цене ↑", sortProperty: SortPropertyEnum.PRICE_ASC },
-  { name: "алфавиту ↓", sortProperty: SortPropertyEnum.TITLE_DESC },
-  { name: "алфавиту ↑", sortProperty: SortPropertyEnum.TITLE_ASC },
+export const sortList: SortType[] = [
+    {name: "популярности ↓", sortProperty: SortPropertyEnum.RATING_DESC},
+    {name: "популярности ↑", sortProperty: SortPropertyEnum.RATING_ASC},
+    {name: "цене ↓", sortProperty: SortPropertyEnum.PRICE_DESC},
+    {name: "цене ↑", sortProperty: SortPropertyEnum.PRICE_ASC},
+    {name: "алфавиту ↓", sortProperty: SortPropertyEnum.TITLE_DESC},
+    {name: "алфавиту ↑", sortProperty: SortPropertyEnum.TITLE_ASC},
 ];
 
 type SortPopupProps = {
-  activeSortOption: SortItem;
+    activeSortOption: SortType;
 };
 
-const SortPopup: React.FC<SortPopupProps> = memo(({ activeSortOption }) => {
-  useWhyDidYouUpdate("SortPopup", { activeSortOption });
-  const [open, setOpen] = React.useState(false);
-  const sortRef = useRef<HTMLDivElement>(null);
-  const dispatch = useDispatch();
-  const onClickSortList = (obj: SortItem) => {
-    dispatch(setSortOption(obj));
-    setOpen(false);
-  };
-  // console.log("🚀SortPopup render!");
-  useEffect(() => {
-    const handelClickOutside = (event: MouseEvent) => {
-      const _event = event as PopupClick;
-      if (sortRef.current && !_event.path.includes(sortRef.current)) {
+export const Sort: React.FC<SortPopupProps> = memo(({activeSortOption}) => {
+    useWhyDidYouUpdate("SortPopup", {activeSortOption});
+    const [open, setOpen] = React.useState(false);
+    const sortRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
+    const onClickSortList = (obj: SortType) => {
+        dispatch(setSortOption(obj));
         setOpen(false);
-      }
     };
-    document.body.addEventListener("click", handelClickOutside);
-    return () => document.body.removeEventListener("click", handelClickOutside);
-  }, []);
+    // console.log("🚀SortPopup render!");
+    useEffect(() => {
+        const handelClickOutside = (event: MouseEvent) => {
+            const _event = event as PopupClick;
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
+                setOpen(false);
+            }
+        };
+        document.body.addEventListener("click", handelClickOutside);
+        return () => document.body.removeEventListener("click", handelClickOutside);
+    }, []);
 
   return (
     <div ref={sortRef} className="sort">
@@ -84,5 +83,3 @@ const SortPopup: React.FC<SortPopupProps> = memo(({ activeSortOption }) => {
     </div>
   );
 });
-
-export default SortPopup;
