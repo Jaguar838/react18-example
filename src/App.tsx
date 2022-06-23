@@ -8,7 +8,7 @@ import {lazy, Suspense} from "react";
 import {LoaderUI} from "./components";
 
 const Cart = Loadable({
-    loader: () => import("./components/Cart" /* webpackChunkName: "Cart" */),
+    loader: () => import("./pages/Cart" /* webpackChunkName: "Cart" */),
     loading: () => <LoaderUI/>,
 });
 const FullPizza = lazy(
