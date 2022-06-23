@@ -1,5 +1,5 @@
 import "./scss/app.scss";
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Loadable from "react-loadable";
 import Home from "./pages/Home";
 
@@ -20,25 +20,27 @@ const NotFound = lazy(
 
 function App() {
     return (
-        <Suspense fallback={<LoaderUI/>}>
-            <Routes>
-                <Route path="/" element={<MainLayout/>}>
-                    <Route path="" element={<Home/>}/>
-                    <Route
-                        path="cart"
-                        element={<Cart/>}
-                    />
-                    <Route
-                        path="pizza/:id"
-                        element={<FullPizza/>}
-                    />
-                    <Route
-                        path="*"
-                        element={<NotFound/>}
-                    />
-                </Route>
-            </Routes>
-        </Suspense>
+        <Router>
+            <Suspense fallback={<LoaderUI/>}>
+                <Routes>
+                    <Route path="/" element={<MainLayout/>}>
+                        <Route path="" element={<Home/>}/>
+                        <Route
+                            path="cart"
+                            element={<Cart/>}
+                        />
+                        <Route
+                            path="pizza/:id"
+                            element={<FullPizza/>}
+                        />
+                        <Route
+                            path="*"
+                            element={<NotFound/>}
+                        />
+                    </Route>
+                </Routes>
+            </Suspense>
+        </Router>
     );
 }
 
